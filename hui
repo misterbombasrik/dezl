@@ -1,0 +1,76 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+class Task {
+    private String description;
+    private boolean isCompleted;
+
+    public Task(String description) {
+        this.description = description;
+        this.isCompleted = false;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public boolean isCompleted() {
+        return isCompleted;
+    }
+
+    public void markAsCompleted() {
+        this.isCompleted = true;
+    }
+
+    @Override
+    public String toString() {
+        return (isCompleted ? "[x] " : "[ ] ") + description;
+    }
+}
+
+class ToDoList {
+    private ArrayList<Task> tasks;
+
+    public ToDoList() {
+        tasks = new ArrayList<>();
+    }
+
+    public void addTask(String description) {
+        tasks.add(new Task(description));
+        System.out.println("Задача добавлена: " + description);
+    }
+
+    public void removeTask(int index) {
+        if (index >= 0 && index < tasks.size()) {
+            Task task = tasks.remove(index);
+            System.out.println("Задача удалена: " + task.getDescription());
+        } else {
+            System.out.println("Неверный индекс задачи.");
+        }
+    }
+
+    public void markTaskAsCompleted(int index) {
+        if (index >= 0 && index < tasks.size()) {
+            tasks.get(index).markAsCompleted();
+            System.out.println("Задача отмечена как выполненная: " + tasks.get(index).getDescription());
+        } else {
+            System.out.println("Неверный индекс задачи.");
+        }
+    }
+
+    public void showTasks() {
+        if (tasks.isEmpty()) {
+            System.out.println("Список задач пуст.");
+        } else {
+            System.out.println("Список задач:");
+            for (int i = 0; i < tasks.size(); i++) {
+                System.out.println(i + ". " + tasks.get(i).toString());
+            }
+        }
+    }
+}
+
+public class ToDoApp {
+    public static void main(String[] args) {
+        ToDoList toDoList = new ToDoList();
+        Scanner scanner = new Scanner
